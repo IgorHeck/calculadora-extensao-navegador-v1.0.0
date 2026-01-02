@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Calculadora de IRRF e INSS",
+  "version": "1.0.0",
+  "description": "Calculadora de Imposto de Renda e INSS com tabelas atualizadas",
+  "icons": {
+    "16": "icons/calculadora-16.png",
+    "48": "icons/calculadora-48.png",
+    "96": "icons/calculadora-96.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Calculadora de Impostos",
+    "default_icon": {
+      "16": "icons/calculadora-16.png",
+      "48": "icons/calculadora-48.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "2020": {
+    "01": {
+      "faixas": [
+        { "ate": 1045.00, "aliquota": 7.5 },
+        { "ate": 2089.60, "aliquota": 9.0 },
+        { "ate": 3134.40, "aliquota": 12.0 },
+        { "ate": 6101.06, "aliquota": 14.0 }
+      ]
+    }
+  },
+  "2021": {
+    "01": {
+      "faixas": [
+        { "ate": 1100.00, "aliquota": 7.5 },
+        { "ate": 2203.48, "aliquota": 9.0 },
+        { "ate": 3305.22, "aliquota": 12.0 },
+        { "ate": 6433.57, "aliquota": 14.0 }
+      ]
+    }
+  },
+  "2022": {
+    "01": {
+      "faixas": [
+        { "ate": 1212.00, "aliquota": 7.5 },
+        { "ate": 2427.35, "aliquota": 9.0 },
+        { "ate": 3641.03, "aliquota": 12.0 },
+        { "ate": 7087.22, "aliquota": 14.0 }
+      ]
+    }
+  },
+  "2023": {
+    "01": {
+      "faixas": [
+        { "ate": 1302.00, "aliquota": 7.5 },
+        { "ate": 2571.29, "aliquota": 9.0 },
+        { "ate": 3856.94, "aliquota": 12.0 },
+        { "ate": 7507.49, "aliquota": 14.0 }
+      ]
+    },
+    "05": {
+      "faixas": [
+        { "ate": 1320.00, "aliquota": 7.5 },
+        { "ate": 2571.29, "aliquota": 9.0 },
+        { "ate": 3856.94, "aliquota": 12.0 },
+        { "ate": 7507.49, "aliquota": 14.0 }
+      ]
+    }
+  },
+  "2024": {
+    "01": {
+      "faixas": [
+        { "ate": 1412.00, "aliquota": 7.5 },
+        { "ate": 2666.68, "aliquota": 9.0 },
+        { "ate": 4000.03, "aliquota": 12.0 },
+        { "ate": 7786.02, "aliquota": 14.0 }
+      ]
+    }
+  },
+  "2025": {
+    "01": {
+      "faixas": [
+        { "ate": 1518.00, "aliquota": 7.5 },
+        { "ate": 2793.88, "aliquota": 9.0 },
+        { "ate": 4190.83, "aliquota": 12.0 },
+        { "ate": 8157.41, "aliquota": 14.0 }
+      ]
+    }
+  }
+}

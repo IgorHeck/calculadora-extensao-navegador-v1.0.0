@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Fiscal Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="app" class="container-fluid py-3">
+    <header class="text-center mb-4">
+        <h1 class="h4 fw-bold">Calculadora</h1>
+    </header>
+
+    <ul class="nav nav-pills nav-fill mb-4 shadow-sm p-1 bg-white rounded-pill" id="mainTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active rounded-pill" data-tab="tab-irrf">IRRF</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link rounded-pill" data-tab="tab-inss">INSS</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link rounded-pill" data-tab="tab-tabelas">Tabelas</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link rounded-pill" data-tab="tab-config">Config</button>
+        </li>
+    </ul>
+
+    <main class="tab-content-wrapper">
+        
+    <section id="tab-irrf" class="tab-pane-custom active">
+        <div class="card p-4 border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-primary mb-0">Imposto de Renda (IRRF)</h5>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <div class="form-check form-switch m-0">
+                        <input class="form-check-input" type="checkbox" id="novoCalculo2026" checked>
+                        <label class="form-check-label fw-bold" for="novoCalculo2026">Modelo 2026</label>
+                    </div>
+                    
+                    <div class="help-container">
+                        <span class="help-icon" id="btnHelp2026">?</span>
+                        <div class="help-tooltip" id="tooltip2026">
+                            O modelo 2026 utiliza a nova sistemática de <strong>Redutor Legal</strong>, que aplica um desconto proporcional direto no imposto devido, ampliando a faixa de isenção de forma automática.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="camposAte2025" class="hidden">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Ano</label>
+                        <select id="anoIRRF" class="form-select"></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Mês</label>
+                        <select id="mesIRRF" class="form-select">
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Junho</option>
+                            <option value="07">Julho</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12" selected>Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Base de Cálculo (R$)</label>
+                    <input type="text" id="baseCalculoIRRF" class="form-control input-moeda" placeholder="R$ 0,00">
+                </div>
+            </div>
+
+            <div id="campos2026">
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Ano</label>
+                        <select id="ano2026" class="form-select"></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Mês</label>
+                        <select id="mes2026" class="form-select">
+                            <option value="01">Janeiro</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Rendimentos Brutos (R$)</label>
+                    <input type="text" id="rendimentosTributaveis" class="form-control input-moeda" placeholder="R$ 0,00">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Deduções (INSS, Dependentes...)</label>
+                    <input type="text" id="deducao" class="form-control input-moeda" placeholder="R$ 0,00">
+                </div>
+            </div>
+
+            <button id="btnCalcularIRRF" class="btn btn-primary w-100 py-2 fw-bold">Calcular Imposto</button>
+            
+            <div id="resultadoIRRFBox" class="result-box hidden mt-4 position-relative">
+            <button type="button" class="btn-copy-full" data-action="copy-full" data-target="resultadoIRRFBox">
+                <span class="copy-label">Resumo</span> 📋
+            </button>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <h4 id="resultadoIRRF" class="mb-0">R$ 0,00</h4>
+                <button type="button" class="btn-copy-value" data-action="copy-value" data-target="resultadoIRRF">📋</button>
+            </div>
+            
+            <div id="detalhesIRRF"></div>
+
+            <div id="areaModelos2026" class="mt-3 pt-3 border-top hidden">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <span class="small d-block mb-1 text-muted fw-bold">MODELO MENSAGEM</span>
+                        <div class="btn-group w-100">
+                            <button class="btn btn-outline-primary btn-sm" data-action="copy-msg-text">Texto</button>
+                            <button class="btn btn-outline-secondary btn-sm" data-action="copy-msg-jira">Jira</button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <span class="small d-block mb-1 text-muted fw-bold">MODELO TABELA</span>
+                        <div class="btn-group w-100">
+                            <button class="btn btn-outline-success btn-sm" data-action="copy-msg-table">Tabela</button>
+                            <button class="btn btn-outline-secondary btn-sm" data-action="copy-msg-jira-table">Jira</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+        
+        <section id="tab-inss" class="tab-pane-custom">
+            <div class="card p-4 border-0 shadow-sm">
+                <h5 class="fw-bold text-primary mb-3">Previdência (INSS)</h5>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Tabela INSS</label>
+                    <select id="anoINSS" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Salário Bruto (R$)</label>
+                    <input type="text" id="baseCalculoINSS" class="form-control input-moeda" placeholder="R$ 0,00">
+                </div>
+                <button id="btnCalcularINSS" class="btn btn-primary w-100 py-2 fw-bold">Calcular INSS</button>
+                
+                <div id="resultadoINSSBox" class="result-box hidden mt-4 position-relative">
+                    <button type="button" class="btn-copy-full" data-action="copy-full" data-target="resultadoINSSBox" title="Copiar Resumo Completo">
+                        <span class="copy-label">Copiar Resumo</span> 📋
+                    </button>
+
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <h4 id="resultadoINSS" class="mb-0">R$ 0,00</h4>
+                        <button type="button" class="btn-copy-value" data-action="copy-value" data-target="resultadoINSS" title="Copiar Valor">
+                            📋
+                        </button>
+                    </div>
+                    
+                    <div id="detalhesINSS"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-tabelas" class="tab-pane-custom">
+            <div class="card p-4 border-0 shadow-sm">
+                <h5 class="fw-bold mb-4 text-primary border-bottom pb-2">Tabelas Vigentes (2025)</h5>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="small fw-bold text-muted mb-0">TABELA IRRF</h6>
+                <button type="button" class="btn-copy-icon" data-tipo="irrf">
+                    <span class="icon-label">Copiar</span>
+                    <span class="icon-clip">📋</span>
+                </button>
+            </div>
+            <div id="containerTabelaIRRF" class="table-responsive mb-4"></div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="small fw-bold text-muted mb-0">TABELA INSS</h6>
+                <button type="button" class="btn-copy-icon" data-tipo="inss">
+                    <span class="icon-label">Copiar</span>
+                    <span class="icon-clip">📋</span>
+                </button>
+            </div>
+            <div id="containerTabelaINSS" class="table-responsive"></div>
+            </div>
+        </section>
+
+        <section id="tab-config" class="tab-pane-custom">
+            <div class="card p-4 border-0 shadow-sm">
+                <h5 class="fw-bold mb-4">Configurações</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="toggleDarkMode">
+                    <label class="form-check-label" for="toggleDarkMode">Modo Escuro (Dark Mode)</label>
+                </div>
+                <button id="btnLimparDados" class="btn btn-outline-danger btn-sm w-100">Limpar campos</button>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/inss.js"></script>
+<script src="js/irrf.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
